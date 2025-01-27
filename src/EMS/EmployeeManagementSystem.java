@@ -146,7 +146,7 @@ public class EmployeeManagementSystem {
             System.out.println("1. Insert\n2. Update\n3. Delete\n4. Display\n5. Exit");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:

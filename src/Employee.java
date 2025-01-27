@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.util.regex.Pattern;
 
 public class Employee {
     private int id;
@@ -12,11 +13,11 @@ public class Employee {
 
     public Employee(int id, String Name, String Designation, String PhoneNumber, Double Salary, String Email, Addresse address, ArrayList<WorkExperience> workExperience){
         this.id=id;
-        this.Name=Name;
-        this.Designation=Designation;
-        this.PhoneNumber=PhoneNumber;
+        this.Name=validateString(Name,"name");
+        this.Designation=validateString(Designation,"designation");
+        this.PhoneNumber=validatenumber(PhoneNumber,"phone number");
         this.Salary=Salary;
-        this.Email=Email;
+        this.Email=validEmail(Email,"email ");
         this.address=address;
         this.workExperience=workExperience;
 
@@ -24,6 +25,27 @@ public class Employee {
 
 
     }
+    private String validatenumber(String field,String fieldname){
+        if(field == null || field.isEmpty() || (field.length()!=10) || !field.matches("[0-9\\s]+")){
+            throw new IllegalArgumentException(fieldname+"enter valid character");
+        }
+        return field;
+    }
+    private String validateString(String field,String fieldname){
+        if(field == null || field.isEmpty() || !field.matches("[a-zA-z\\s]+")){
+            throw new IllegalArgumentException(fieldname+"enter valid character");
+        }
+        return field;
+    }
+    private String validEmail(String field,String fieldname) {
+        if(field == null || field.isEmpty() || !field.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")){
+            throw new IllegalArgumentException(fieldname+"enter valid character");
+        }
+        return field;
+    }
+
+
     public String getName() {
         return this.Name;
     }

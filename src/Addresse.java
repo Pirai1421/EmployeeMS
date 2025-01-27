@@ -6,7 +6,7 @@ public class Addresse {
     public String State;
     public String Country;
     public Addresse(String streetNumber, String streetName, String city, String state, String country) {
-        this.StreetNumber = streetNumber;
+        this.StreetNumber = validatenumber(streetNumber,"Street number");
         this.StreetName = validateString(streetName, "Street Name");
         this.City = validateString(city, "City");
         this.State = validateString(state, "State");
@@ -18,7 +18,12 @@ public class Addresse {
         }
         return field;
     }
-
+    private String validatenumber(String field,String fieldname){
+        if(field == null || field.isEmpty() || !field.matches("[0-9/\\s]+")){
+            throw new IllegalArgumentException(fieldname+"enter valid character");
+        }
+        return field;
+    }
 
 
 
